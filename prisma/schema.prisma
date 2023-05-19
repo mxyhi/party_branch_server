@@ -1,0 +1,227 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户表
+model User {
+  userId        Int     @id @default(autoincrement()) // 用户id
+  avatar        String // 头像地址
+  desc          String // 描述
+  username      String  @unique // 用户登录账户名 唯一
+  homePath      String // 默认主页
+  realName      String // 昵称
+  token         String? @unique // 登录验证token 唯一
+  password      String // 密码
+  roles         Json // 角色
+  sex           Int // 性别 0 女 1 男
+  phone         String // 手机号
+  age           Int // 年龄
+  class         String // 班级
+  type          Int // 用户类型 0 管理员 1 党支部 2 普通用户,
+  create_time   String // 创建时间
+  updated_time  String // 修改时间
+  partyBranchId Int // 党支部id
+}
+
+// 党支部表
+model PartyBranch {
+  id           Int    @id @default(autoincrement()) // 党支部id 唯一 自增
+  name         String // 党支部名称
+  desc         String // 党支部简介
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  people_count Int // 人数
+}
+
+// 报告活动表
+model Report {
+  id           Int    @id @default(autoincrement()) // 报告活动id 唯一 自增
+  title        String // 标题
+  desc         String // 简介
+  content      String // 内容
+  start_time   String // 开始时间
+  end_time     String // 结束时间
+  poster       Json // 头像地址集合
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  address      String // 地址
+  people_count Int // 参与人数
+}
+
+// 读书活动表
+model Read {
+  id           Int    @id @default(autoincrement()) // id 主键 自增
+  title        String // 标题
+  desc         String // 描述
+  content      String // 活动内容
+  start_time   String // 开始时间
+  end_time     String // 结束时间
+  poster       Json // 头像地址集合
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  address      String // 地址
+  people_count Int // 参与人数
+}
+
+// 义务活动表
+model Obligation {
+  id           Int    @id @default(autoincrement()) // id 主键 自增
+  title        String // 标题
+  desc         String // 描述
+  content      String // 活动内容
+  start_time   String // 开始时间
+  end_time     String // 结束时间
+  poster       Json // 头像地址集合
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  address      String // 地址
+  people_count Int // 参与人数
+}
+
+// 服务活动表
+model Service {
+  id           Int    @id @default(autoincrement()) // id 主键 自增
+  title        String // 标题
+  desc         String // 描述
+  content      String // 活动内容
+  start_time   String // 开始时间
+  end_time     String // 结束时间
+  poster       Json // 头像地址集合
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  address      String // 地址
+  people_count Int // 参与人数
+}
+
+// 工作通知
+model WorkNotice {
+  id           Int    @id @default(autoincrement()) // id 主键 自增
+  title        String // 标题
+  desc         String // 描述
+  content      String // 活动内容
+  poster       String // 头像地址
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  click_count  Int // 点击量
+  start_time   String // 开始时间
+  end_time     String // 结束时间
+}
+
+// 党课表
+model PartyLecture {
+  id            Int    @id @default(autoincrement())
+  title         String // 名称
+  desc          String // 简介
+  content       String // 内容
+  video_url     String // 视频
+  poster        String // 封面
+  create_time   String // 创建时间
+  updated_time  String // 修改时间
+  click_count   Int // 点击量
+  star_count    Int // 点赞数
+  collect_count Int // 收藏数
+  start_time    String // 开始时间
+  end_time      String // 结束时间
+}
+
+// 党史表
+model PartyHistory {
+  id            Int    @id @default(autoincrement())
+  title         String // 名称
+  desc          String // 简介
+  content       String // 内容
+  poster        String // 封面
+  create_time   String // 创建时间
+  updated_time  String // 修改时间
+  click_count   Int // 点击量
+  star_count    Int // 点赞数
+  collect_count Int // 收藏数
+  start_time    String // 开始时间
+  end_time      String // 结束时间
+}
+
+// 红色语录表
+model PartyQuotes {
+  id            Int    @id @default(autoincrement())
+  title         String // 名称
+  desc          String // 简介
+  content       String // 内容
+  create_time   String // 创建时间
+  updated_time  String // 修改时间
+  click_count   Int // 点击量
+  star_count    Int // 点赞数
+  collect_count Int // 收藏数
+  start_time    String // 开始时间
+  end_time      String // 结束时间
+}
+
+// 交流论坛表
+model Forum {
+  id            Int    @id @default(autoincrement())
+  title         String // 名称
+  desc          String // 简介
+  content       String // 内容
+  poster        String // 封面
+  create_time   String // 创建时间
+  updated_time  String // 修改时间
+  click_count   Int // 点击量
+  star_count    Int // 点赞数
+  collect_count Int // 收藏数
+  comment_id    Json // 评论id
+  author_id     Int // 作者id
+}
+
+// 评论表
+model Comment {
+  id           Int    @id @default(autoincrement())
+  content      String // 内容
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  user_id      Int // 用户id
+  forum_id     Int // 交流论坛id
+}
+
+// 留言表
+model AMessage {
+  id           Int    @id @default(autoincrement())
+  content      String // 内容
+  create_time  String // 创建时间
+  updated_time String // 修改时间
+  user_id      Int // 用户id
+}
+
+// 报告活动报名表
+model ReportRegistration {
+  id        Int @id @default(autoincrement())
+  user_id   Int
+  report_id Int
+}
+
+// 读书活动报名表
+model ReadRegistration {
+  id      Int @id @default(autoincrement())
+  user_id Int
+  read_id Int
+}
+
+// 服务活动报名表
+model ServiceRegistration {
+  id         Int @id @default(autoincrement())
+  user_id    Int
+  service_id Int
+}
+
+// 义务活动报名表
+model ObligationRegistration {
+  id            Int @id @default(autoincrement())
+  user_id       Int
+  obligation_id Int
+}

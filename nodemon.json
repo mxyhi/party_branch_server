@@ -1,0 +1,22 @@
+{
+  "restartable": "rs",
+  "watch": [
+    "./src/",
+    "./.env",
+    "./server.js",
+    "./dev.js",
+    "./env.js"
+  ],
+  "verbose": true,
+  "execMap": {
+    "": "node",
+    "js": "node --harmony"
+  },
+  "delay": "1000",
+  "exec": "npm run ts:start",
+  "ext": "ts,js",
+  "events": {
+    "restart": "clear"
+  },
+  "inspect": true
+}

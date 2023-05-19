@@ -65,11 +65,11 @@ test/types/index.js
 dist
 
 # public
-public/static/images/*
-public/static/videos/*
+/public/static/images/*.png
+/public/static/videos/*.mp4
 
 # sql
-db
+/db
 
 # prisma
 prisma/migrations
